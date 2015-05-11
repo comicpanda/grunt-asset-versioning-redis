@@ -36,7 +36,8 @@ module.exports = function(grunt) {
           host : process.env.REDIS_HOST || '127.0.0.1',
           auth_pass : process.env.REDIS_AUTH || null
       },
-      prepare: {},      
+      prepare: {},
+      current: {},
       confirm : {
         options : {
           nextVersion : '<%= nextversion.version %>'  
@@ -64,6 +65,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['clean', 'nextversion', 'nodeunit']);
   console.log( grunt.config('nextversion.prepare.version')  );
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'nextversion:prepare','nextversion:confirm']);
+  grunt.registerTask('default', ['jshint', 'nextversion:prepare', 'nextversion:current', 'nextversion:confirm']);
 
 };
