@@ -42,7 +42,10 @@ module.exports = function(grunt) {
         } else if (target === 'current') {
           client.get('PRE_'+ options.keyname, function(err, reply) {
             grunt.config.set('nextversion.version', reply);
-            completion();  
+            client.get(options.keyname, function(err, reply){
+              grunt.config.set('nextversion.current.version', reply);
+              completion();
+            });
           });
         }  else if (target === 'confirm') {          
           client.set(options.keyname, options.nextVersion, function(err, reply){
