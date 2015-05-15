@@ -15,8 +15,7 @@ module.exports = function(grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('nextversion', 'Get next version from redis', function() {
-    var target = this.target,
-        done = this.async(),   
+    var done = this.async(),   
         options = this.options({}),
         redisOptions = {
           'socket_keepalive' : false,
@@ -33,22 +32,11 @@ module.exports = function(grunt) {
         grunt.log.error('Redis Error "' + err);
     });
     
-    client.on("connect", function () {
-        if (target === 'prepare') {
-          client.incr('PRE_'+ options.keyname, function(err, reply) {
-            grunt.config.set('nextversion.version', reply);
-            client.get(options.keyname, function(err, reply) {
-              grunt.config.set('nextversion.current.version', reply);
-              completion();
-            });  
-          });
-        }  else if (target === 'confirm') {          
-          client.set(options.keyname, options.nextVersion, function(err, reply){
-            completion();
-          });          
-        } else {
+    client.on("connect", function () {          
+        client.set(options.keyname, options.nextVersion, function(err, reply) {
+          grunt.log.ok('[' + reply + '] Next Version : ' + options.nextVersion);
           completion();
-        }
+        });
     });
   });
 };

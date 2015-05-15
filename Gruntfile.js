@@ -34,14 +34,10 @@ module.exports = function(grunt) {
           keyname : 'ASSET_VERSION',
           port : process.env.REDIS_PORT || 6379,
           host : process.env.REDIS_HOST || '127.0.0.1',
-          auth_pass : process.env.REDIS_AUTH || null
+          auth_pass : process.env.REDIS_AUTH || null,
+          nextVersion : '456'
       },
-      prepare: {},
-      confirm : {
-        options : {
-          nextVersion : '<%= nextversion.version %>'  
-        }
-      } 
+      next: {}
     },
 
     // Unit tests.
