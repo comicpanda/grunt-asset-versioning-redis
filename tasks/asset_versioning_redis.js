@@ -19,12 +19,13 @@ module.exports = function(grunt) {
         options = this.options({}),
         redisOptions = {
           'socket_keepalive' : false,
-          'auth_pass' : options.auth || null
+          'auth_pass' : options.auth || null,
+          'db' : options.db || null
         };
     
     var client = redis.createClient(options.port, options.host, redisOptions), 
         completion = function() {
-          client.end();
+          client.end(true);
           done();
         };
     
