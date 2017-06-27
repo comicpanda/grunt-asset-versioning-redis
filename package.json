@@ -1,7 +1,7 @@
 {
   "name": "grunt-asset-versioning-redis",
   "description": "asset version using redis",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/comicpanda/grunt-asset-versioning-redis",
   "author": {
     "name": "Dev1",
